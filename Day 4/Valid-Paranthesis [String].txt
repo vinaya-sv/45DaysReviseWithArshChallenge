@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isValid(String s) {
+        String x=s;
+        ArrayList<Character> list=new ArrayList<Character>();
+        Character peek= new Character('.');
+        int len=x.length();
+        Character c;
+        for(int i=0;i<len;i++){
+            if(list.size()==0)
+                peek='.';
+            else
+                peek=list.get(list.size()-1);
+            c=x.charAt(i);
+            if(c.equals('(') || c.equals('[') || c.equals('{')){
+                list.add(c);
+            }
+            else if((c.equals(')') && peek.equals('(')) || (c.equals(']') && peek.equals('['))   || (c.equals('}') && peek.equals('{'))){
+                list.remove(list.size()-1);
+            }
+            else
+            return false;
+        //    System.out.println(list+" "+peek);
+        }
+            if(list.size()==0)
+            return true;
+            return false;
+    }
+}
