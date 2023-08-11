@@ -1,0 +1,35 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        String ans="";
+        for(int i=0;i<board.length;i++)
+            for(int j=0;j<board[0].length;j++){
+                
+                // System.out.println("__________________-");
+                if(calculate(board,word, ans, i, j)){
+                     return true;
+                }
+            }
+        return false;
+    }
+    public static boolean calculate(char board[][], String word, String ans, int x, int y){
+        if(x<0 || x>=board.length || y<0 || y>=board[0].length || board[x][y]=='*')
+            return false;
+        ans+=board[x][y];
+        if(ans.equals(word))
+            return true;
+        char temp=board[x][y];
+        board[x][y]='*';
+        // System.out.println(ans);
+        if(word.contains(ans)){
+            boolean l1=calculate(board,word,ans,x+1,y);
+            boolean l2=calculate(board,word,ans,x, y+1);
+            boolean l3=calculate(board,word,ans,x-1, y);
+            boolean l4=calculate(board,word,ans, x, y-1);
+            board[x][y]=temp;
+            return (l1||l2||l3||l4);
+        }
+        board[x][y]=temp;
+        return false;
+
+    }
+}

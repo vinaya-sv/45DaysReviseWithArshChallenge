@@ -1,0 +1,49 @@
+class Solution {
+    public String simplifyPath(String path) {
+        String str="";
+        Stack<String> stack=new Stack<>();
+        for(int i=0;i<path.length();i++){
+            if(path.charAt(i)=='/'){
+                if(str.equals("..")){
+                // System.out.println("Hello");
+                    if(!stack.empty())
+                    stack.pop();
+                    str="";
+                }
+                else if(str.equals(".")){
+                    str="";
+                }
+                else if(str.length()!=0){
+                    stack.push(str);
+                    str="";
+                }
+            }
+            else if(path.charAt(i)=='.'){
+                str+=path.charAt(i);
+            }
+            else{
+                str+=path.charAt(i);
+            }
+        }
+        if(str.equals("..")){
+            // System.out.println("Hello");
+                if(!stack.empty())
+                stack.pop();
+                str="";
+        }
+        else if(str.equals("."));
+        else if(str.length()!=0){
+            stack.push(str);
+            str="";
+        }
+        str="";
+        System.out.println(stack);
+        String ans="";
+        if(stack.empty())
+            return "/";
+        for(String x: stack){
+            ans+="/"+x;
+        }
+        return ans;
+    }
+}
